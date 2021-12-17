@@ -2771,8 +2771,10 @@ void thread_gps(void) {
                     if(latest_msg == INVALID || latest_msg == UNKNOWN) {
                         /* checksum failed */
                         frame_size = 0;
-                    } else if (latest_msg == NMEA_RMC) { /* Get location from RMC frames */
+                    } else if (latest_msg == NMEA_GGA) { /* Get location from GGA frames */
                         gps_process_coords();
+                    } else if (latest_msg == NMEA_RMC) { /* Get time from RMC frames */
+                        gps_process_sync();
                     }
                 }
             }
